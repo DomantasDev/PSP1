@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrategyPattern
+namespace StrategyPattern.Radios
 {
     public interface IRadio
     {

@@ -41,11 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engines\FastEngine.cs" />
+    <Compile Include="Engines\SlowEngine.cs" />
     <Compile Include="Radios\HighQualityRadio.cs" />
     <Compile Include="Engines\IEngine.cs" />
     <Compile Include="Radios\IRadio.cs" />
     <Compile Include="Radios\LowQualityRadio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
