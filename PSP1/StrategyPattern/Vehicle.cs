@@ -21,16 +21,19 @@ namespace StrategyPattern
             _radio = radio;
         }
 
-        void DeriveEconomically(int distance)
+        public void DriveEconomically(int distance)
         {
             int distanceToAccelerate = 0;
             _engine.TurnOn();
+            Console.WriteLine("Turning on the engine");
             CurrentSpeed = RPMToSpeed(_engine.RPM);
+            Console.WriteLine($"Starting speed: {CurrentSpeed}");
             if (FuelTank > 0)
                 while (distance > 0)
                 {
                     distance -= CurrentSpeed;
                     FuelTank -= _engine.Consumption;
+                    Console.WriteLine($"\t Fuel left: {FuelTank}");
                     if (FuelTank <= 0)
                     {
                         Console.WriteLine("OUT OF FUEL");
@@ -39,32 +42,43 @@ namespace StrategyPattern
                     if (distance - distanceToAccelerate <= 0)
                     {
                         _engine.Decelerate();
+                        CurrentSpeed = RPMToSpeed(_engine.RPM);
+                        Console.WriteLine($"Decelerating to {CurrentSpeed}");
                     }
                     else if (_engine.RPM < 2000)
                     {
                         distanceToAccelerate += CurrentSpeed;
                         _engine.Accelerate();
                         CurrentSpeed = RPMToSpeed(_engine.RPM);
+                        Console.WriteLine($"Accelerating to {CurrentSpeed}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Maintaining speed {CurrentSpeed}");
                     }
                 }
             _engine.TurnOff();
-
+            Console.WriteLine("Turning off the engine");
         }
 
-        void DriveFast(int distance, float radioFrequency)
+        public void DriveFast(int distance, float radioFrequency)
         {
             int distanceToAccelerate = 0;
             _engine.TurnOn();
+            Console.WriteLine("Turning on the engine");
             _radio.TurnOn();
+            Console.WriteLine("Turning on the radio");
             _radio.ChangeFrequency(radioFrequency);
-            Console.WriteLine(_radio.NowPlaying());
+            Console.WriteLine(_radio.NowPlaying());         
             CurrentSpeed = RPMToSpeed(_engine.RPM);
+            Console.WriteLine($"Starting speed: {CurrentSpeed}");
             if (FuelTank > 0)
                 while (distance > 0)
                 {
                     distance -= CurrentSpeed;
                     FuelTank -= _engine.Consumption;
-                    if(FuelTank <= 0)
+                    Console.WriteLine($"\t Fuel left: {FuelTank}");
+                    if (FuelTank <= 0)
                     {
                         Console.WriteLine("OUT OF FUEL");
                         break;
@@ -72,16 +86,25 @@ namespace StrategyPattern
                     if (distance - distanceToAccelerate <= 0)
                     {
                         _engine.Decelerate();
+                        CurrentSpeed = RPMToSpeed(_engine.RPM);
+                        Console.WriteLine($"Decelerating to {CurrentSpeed}");
                     }
-                    else
+                    else if(_engine.RPM != _engine.MaxRPM)
                     {
                         distanceToAccelerate += CurrentSpeed;
                         _engine.Accelerate();
                         CurrentSpeed = RPMToSpeed(_engine.RPM);
+                        Console.WriteLine($"Accelerating to {CurrentSpeed}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Maintaining speed {CurrentSpeed}");
                     }
                 }
             _engine.TurnOff();
+            Console.WriteLine("Turning off the engine");
             _radio.TurnOff();
+            Console.WriteLine("Turning off the radio");
         }
 
         private int RPMToSpeed(int RPM)

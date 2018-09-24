@@ -9,6 +9,7 @@ namespace StrategyPattern.Engines
     public interface IEngine
     {
         int RPM { get; }
+        int MaxRPM { get; }
         float Consumption { get; }
         bool IsOn { get; }
 
