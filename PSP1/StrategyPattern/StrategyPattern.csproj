@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crane.cs" />
     <Compile Include="Engines\FastEngine.cs" />
     <Compile Include="Engines\SlowEngine.cs" />
     <Compile Include="Radios\HighQualityRadio.cs" />

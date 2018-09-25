@@ -14,8 +14,15 @@ namespace StrategyConsole
         static void Main(string[] args)
         {
             Vehicle vehicle = new Vehicle(new SlowEngine(), new HighQualityRadio());
-            vehicle.FuelTank = 200;
+            vehicle.FuelTank = 50;
             vehicle.DriveFast(350, 99.7f);
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Crane crane = new Crane(new SlowEngine());
+            crane.FuelTank = 100;
+            crane.LiftCargo(500, 35);
             Console.ReadLine();
         }
     }
