@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrategyPattern.Radios
+namespace TemplateMethod.Radios
 {
-    public class HighQualityRadio : IRadio
+    public class LowQualityRadio
     {
         public float Frequency { get; private set; }
 
@@ -19,7 +19,7 @@ namespace StrategyPattern.Radios
 
         public string NowPlaying()
         {
-            return $"Listening to {Frequency} FM, on HIGH quality radio";
+            return $"Listening to {Frequency} FM, on LOW quality radio";
         }
 
         public void TurnOff()

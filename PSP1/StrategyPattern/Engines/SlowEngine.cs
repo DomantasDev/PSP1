@@ -8,7 +8,7 @@ namespace StrategyPattern.Engines
 {
     public class SlowEngine : IEngine
     {
-        float _idleConsumption = 6;
+        const float _idleConsumption = 6;
         public float Consumption { get; private set; }
         public int RPM { get; private set; }
         public bool IsOn { get; private set; }

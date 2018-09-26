@@ -1,28 +1,27 @@
-using StrategyPattern;
-using StrategyPattern.Engines;
-using StrategyPattern.Radios;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TemplateMethod.Cranes;
+using TemplateMethod.Vehicles;
 
-namespace StrategyConsole
+namespace TemplateMethodConsole
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Vehicle vehicle = new Vehicle(new FastEngine(), new HighQualityRadio());
+            VehicleWithSlowEngineAndLowQualityRadio vehicle = new VehicleWithSlowEngineAndLowQualityRadio();
             vehicle.FuelTank = 200;
             vehicle.DriveFast(200, 99.7f);
 
             Console.WriteLine();
             Console.WriteLine();
 
-            Crane crane = new Crane(new SlowEngine());
-            crane.FuelTank = 100;
-            crane.LiftCargo(500, 60);
+            CraneWithFastEngine crane = new CraneWithFastEngine();
+            crane.FuelTank = 200;
+            crane.LiftCargo(1000, 30);
             Console.ReadLine();
         }
     }

@@ -1,48 +1,51 @@
-﻿using StrategyPattern.Engines;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrategyPattern
+namespace TemplateMethod.Cranes
 {
-    public class Crane
+    public abstract class Crane
     {
         public float FuelTank { get; set; }
         public const int LiftingSpeed = 5;
 
-        IEngine _engine;
-        public Crane(IEngine engine)
-        {
-            _engine = engine;
-        }
+        protected abstract int RPM { get; }
+        protected abstract int MaxRPM { get; }
+        protected abstract float Consumption { get; }
+        protected abstract bool EngineIsOn { get; }
+
+        protected abstract void TurnOnEngine();
+        protected abstract void Accelerate();
+        protected abstract void Decelerate();
+        protected abstract void TurnOffEngine();
 
         public void LiftCargo(int weight, int height)
         {
             int RPMneeded = WeightToRPM(weight);
-            if(RPMneeded > _engine.MaxRPM)
+            if (RPMneeded > MaxRPM)
             {
                 Console.WriteLine("Engine isnt good enough");
                 return;
             }
             int currentHeight = 0;
-            _engine.TurnOn();
+            TurnOnEngine();
             Console.WriteLine("Turning on the engine");
             if (FuelTank > 0)
                 while (height > currentHeight)
                 {
-                    FuelTank -= _engine.Consumption;
+                    FuelTank -= Consumption;
                     Console.WriteLine($"\t Fuel left: {FuelTank}");
                     if (FuelTank <= 0)
                     {
                         Console.WriteLine("OUT OF FUEL");
                         break;
                     }
-                    if (_engine.RPM < RPMneeded)
+                    if (RPM < RPMneeded)
                     {
-                        _engine.Accelerate();
-                        Console.WriteLine($"Accelerating to {_engine.RPM} RPM");
+                        Accelerate();
+                        Console.WriteLine($"Accelerating to {RPM} RPM");
                     }
                     else
                     {
@@ -51,12 +54,12 @@ namespace StrategyPattern
                     }
                 }
             if (FuelTank > 0)
-                while (_engine.RPM > 1000)
+                while (RPM > 1000)
                 {
-                    _engine.Decelerate();
-                    Console.WriteLine($"Decelerating to {_engine.RPM} RPM");
+                    Decelerate();
+                    Console.WriteLine($"Decelerating to {RPM} RPM");
                 }
-            _engine.TurnOff();
+            TurnOffEngine();
             Console.WriteLine("Turning off the engine");
         }
 

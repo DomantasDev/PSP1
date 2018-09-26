@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrategyPattern.Radios
+namespace TemplateMethod.Radios
 {
-    public class HighQualityRadio : IRadio
+    public class HighQualityRadio
     {
         public float Frequency { get; private set; }
 
